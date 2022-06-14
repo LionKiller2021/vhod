@@ -6,11 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<DataContext>();
+builder.Services.AddScoped<DataContext>();
 
 var app = builder.Build();
-var connectionString = builder.Configuration.GetConnectionString("WebApiDatabase");
-builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(connectionString));
-builder.Services.AddScoped<DataContext>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
